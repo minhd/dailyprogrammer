@@ -6,6 +6,8 @@ https://www.reddit.com/r/dailyprogrammer/comments/4msu2x/challenge_270_easy_tran
 ```
 node js/Transpose input/input.txt
 python python/Transpose.py input/input.txt
+php php/Transpose.php input/input.txt
+
 cd java
 javac Transpose.java && java Transpose ../input/input.txt
 ```
