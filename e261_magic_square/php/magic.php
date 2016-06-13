@@ -14,6 +14,31 @@ function isMagic($square) {
     // find out dimension
     $dimension = sqrt(sizeof($square));
 
+    if ($dimension > (int) $dimension){
+
+        $dimension = ceil($dimension);
+
+        // get missing rows
+        $missingRow = [];
+
+        // calculate goal beforehand
+        $goal = 0;
+        for ($i=0;$i<$dimension;$i++) {
+            $goal += $square[$i];
+        }
+
+        // get missing row by calculating the difference
+        // between the goal and the subSquare column
+        $subSquare = array_chunk($square, $dimension);
+        for ($i=0;$i < $dimension;$i++) {
+            $sum = array_sum(array_column($subSquare, $i));
+            $missingRow[] = $goal - $sum;
+        }
+
+        // add missing row back
+        $square = array_merge($square, $missingRow);
+    }
+
     // split into square sized
     $square = array_chunk($square, $dimension);
 
@@ -67,10 +92,12 @@ $testCases = [
     [8, 1, 6, 7, 5, 3, 4, 9, 2],
     [7,2,3,5,3,9,2,2,4,3,1,5,6,3,5,1,5,6,2,6,2,6,3,6,3],
     [14, 1, 12, 7, 11, 8, 13, 2, 5, 10, 3, 16,
-    4, 15, 6, 9
+    // 4, 15, 6, 9
     ]
 ];
 
 foreach ($testCases as $case) {
-    echo "[".implode(',',$case)."] -> ". (isMagic($case) ? "true" : "false") . "\n";
+    echo "[".implode(',',$case)."] -> "
+    . (isMagic($case) ? "true" : "false")
+    . "\n";
 }
